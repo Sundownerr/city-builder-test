@@ -6,11 +6,11 @@ using VContainer.Unity;
 
 namespace UseCases.Application
 {
-    public class CreateLevelUseCase : IInitializable
+    public class CreateLevelUseCase : IStartable
     {
         [Inject] private IPublisher<CreateLevelRequest> _createLevelRequestPublisher;
 
-        public void Initialize()
+        public void Start()
         {
             _createLevelRequestPublisher.Publish(new CreateLevelRequest());
         }
