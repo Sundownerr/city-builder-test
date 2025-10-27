@@ -14,14 +14,14 @@ namespace Presentation.Gameplay.Presenters
     public class GridPresenter : IInitializable, IDisposable, ITickable
     {
         private readonly CompositeDisposable _disposable = new();
+        private readonly RaycastHit[] _raycastHits = new RaycastHit[1];
         [Inject] private Camera _camera;
         [Inject] private IPublisher<CreateGridRequestDTO> _createGridRequestPublisher;
         [Inject] private ISubscriber<CreateLevelRequest> _createLevelRequestSubscriber;
         [Inject] private GridRepository _gridRepository;
         [Inject] private GridView _gridView;
-        [Inject] private IInputService _inputService;
         private int _layerMask;
-        private readonly RaycastHit[] _raycastHits = new RaycastHit[1];
+        [Inject] private IRaycastFromCameraService _raycastFromCameraService;
 
         public void Dispose() =>
             _disposable.Dispose();
@@ -32,19 +32,16 @@ namespace Presentation.Gameplay.Presenters
             _layerMask = LayerMask.GetMask("Selectable");
         }
 
-        public void Tick()
-        {
-            var ray = _camera.ScreenPointToRay(_inputService.MousePosition);
-            var origin = _camera.transform.position;
+        public void Tick() =>
+            HighlightCell();
 
-            HighlightCell(origin, ray);
-        }
-
-        private void HighlightCell(Vector3 origin, Ray ray)
+        private void HighlightCell()
         {
             _gridView.GridCellHighlight.gameObject.SetActive(false);
 
-            if (Physics.RaycastNonAlloc(origin, ray.direction, _raycastHits, Mathf.Infinity, _layerMask) > 0) {
+            var ray = _raycastFromCameraService.Ray;
+
+            if (Physics.RaycastNonAlloc(ray.origin, ray.direction, _raycastHits, Mathf.Infinity, _layerMask) > 0) {
                 _gridView.GridCellHighlight.gameObject.SetActive(true);
                 _gridView.GridCellHighlight.transform.position = _raycastHits[0].transform.position;
             }

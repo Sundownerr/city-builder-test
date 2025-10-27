@@ -1,4 +1,5 @@
-﻿using Presentation.Gameplay.Presenters;
+﻿using Infrastructure;
+using Presentation.Gameplay.Presenters;
 using Presentation.Gameplay.Views;
 using Repositories.Gameplay;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Installers.Application
             builder.RegisterInstance(GridRepository);
             builder.RegisterInstance(GridView);
             builder.RegisterInstance(Camera);
+            builder.RegisterEntryPoint<RaycastFromCameraService>();
             builder.Register<CreateGridUseCase>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<GridPresenter>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
