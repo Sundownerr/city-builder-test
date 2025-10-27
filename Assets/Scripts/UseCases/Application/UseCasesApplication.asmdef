@@ -1,3 +1,19 @@
 {
-	"name": "UseCases.Application"
+    "name": "UseCases.Application",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
+        "GUID:768360dc903e9e94c979f5770c0a2100",
+        "GUID:b0f0c9ccdc91f9e40b45d18b3bb69606"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

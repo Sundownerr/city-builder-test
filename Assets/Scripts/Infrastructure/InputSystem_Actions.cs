@@ -129,6 +129,24 @@ namespace Infrastructure
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e537600-357f-4aee-af34-d13305534b8f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""f39cef2f-6a53-4dbe-a420-6798a7c1c46e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -261,6 +279,28 @@ namespace Infrastructure
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""SelectBuilding3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a77b5aef-8904-4c2d-9267-91924825e6a0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00aee6f7-dd7c-4e08-9162-d54d1411ff90"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -852,6 +892,8 @@ namespace Infrastructure
             m_Player_SelectBuilding1 = m_Player.FindAction("SelectBuilding1", throwIfNotFound: true);
             m_Player_SelectBuilding2 = m_Player.FindAction("SelectBuilding2", throwIfNotFound: true);
             m_Player_SelectBuilding3 = m_Player.FindAction("SelectBuilding3", throwIfNotFound: true);
+            m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
+            m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -949,6 +991,8 @@ namespace Infrastructure
         private readonly InputAction m_Player_SelectBuilding1;
         private readonly InputAction m_Player_SelectBuilding2;
         private readonly InputAction m_Player_SelectBuilding3;
+        private readonly InputAction m_Player_Select;
+        private readonly InputAction m_Player_Mouse;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -976,6 +1020,14 @@ namespace Infrastructure
             /// Provides access to the underlying input action "Player/SelectBuilding3".
             /// </summary>
             public InputAction @SelectBuilding3 => m_Wrapper.m_Player_SelectBuilding3;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Select".
+            /// </summary>
+            public InputAction @Select => m_Wrapper.m_Player_Select;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Mouse".
+            /// </summary>
+            public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1014,6 +1066,12 @@ namespace Infrastructure
                 @SelectBuilding3.started += instance.OnSelectBuilding3;
                 @SelectBuilding3.performed += instance.OnSelectBuilding3;
                 @SelectBuilding3.canceled += instance.OnSelectBuilding3;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Mouse.started += instance.OnMouse;
+                @Mouse.performed += instance.OnMouse;
+                @Mouse.canceled += instance.OnMouse;
             }
 
             /// <summary>
@@ -1037,6 +1095,12 @@ namespace Infrastructure
                 @SelectBuilding3.started -= instance.OnSelectBuilding3;
                 @SelectBuilding3.performed -= instance.OnSelectBuilding3;
                 @SelectBuilding3.canceled -= instance.OnSelectBuilding3;
+                @Select.started -= instance.OnSelect;
+                @Select.performed -= instance.OnSelect;
+                @Select.canceled -= instance.OnSelect;
+                @Mouse.started -= instance.OnMouse;
+                @Mouse.performed -= instance.OnMouse;
+                @Mouse.canceled -= instance.OnMouse;
             }
 
             /// <summary>
@@ -1365,6 +1429,20 @@ namespace Infrastructure
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnSelectBuilding3(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Select" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSelect(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Mouse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMouse(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
