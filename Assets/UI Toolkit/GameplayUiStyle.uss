@@ -1,0 +1,6 @@
+.buildingButton {
+    bottom: auto;
+    opacity: 1;
+    font-size: 28px;
+    -unity-font-style: bold;
+}

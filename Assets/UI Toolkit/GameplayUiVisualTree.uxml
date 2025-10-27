@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/GameplayUiStyle.uss?fileID=7433441132597879392&amp;guid=c685afbf69e58fb4bbcb274c6e35c960&amp;type=3#GameplayUiStyle" />
+    <ui:VisualElement name="BuildingButtons" style="flex-grow: 1; align-items: flex-end; flex-direction: row; align-self: center; justify-content: center; width: 1049px; align-content: flex-start; margin-bottom: 1%; flex-wrap: nowrap;">
+        <ui:Button text="House" name="HouseButton" class="buildingButton" style="height: 103px; width: 107px;" />
+        <ui:Button text="Farm" name="FarmButton" class="buildingButton" style="height: 103px; width: 107px;" />
+        <ui:Button text="Mine" name="MineButton" class="buildingButton" style="height: 103px; width: 107px;" />
+    </ui:VisualElement>
+</ui:UXML>
