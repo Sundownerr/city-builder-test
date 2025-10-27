@@ -536,54 +536,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &884390796
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 884390797}
-  - component: {fileID: 884390798}
-  m_Layer: 0
-  m_Name: Application Installer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &884390797
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884390796}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &884390798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884390796}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb37ada99eb945f2b8f210ae2b7f0fe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects: []
 --- !u!1 &1633579761
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +546,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1633579763}
   - component: {fileID: 1633579762}
+  - component: {fileID: 1633579765}
+  - component: {fileID: 1633579764}
   m_Layer: 0
   m_Name: Infrastructure Installer
   m_TagString: Untagged
@@ -617,8 +571,6 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  GridRepository: {fileID: 11400000, guid: d36fdad741328514ba863a228f81c426, type: 2}
-  GridView: {fileID: 268674690}
 --- !u!4 &1633579763
 Transform:
   m_ObjectHideFlags: 0
@@ -634,56 +586,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1767998134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1767998136}
-  - component: {fileID: 1767998135}
-  m_Layer: 0
-  m_Name: Gameplay Installer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1767998135
+--- !u!114 &1633579764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767998134}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1633579761}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a639824a96f2414ab30ee3d6e7fd1ada, type: 3}
+  m_Script: {fileID: 11500000, guid: a9dc132e8a06452dbf39d072b6754fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
+    TypeName: Installers.Application.InfracstructureInstaller
   autoRun: 1
   autoInjectGameObjects: []
-  GridRepository: {fileID: 11400000, guid: d36fdad741328514ba863a228f81c426, type: 2}
-  GridView: {fileID: 268674690}
---- !u!4 &1767998136
-Transform:
+--- !u!114 &1633579765
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767998134}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1633579761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16a926b8ad049ebb6ec701cdc94e84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: Installers.Application.InfracstructureInstaller
+  autoRun: 1
+  autoInjectGameObjects: []
+  GridRepository: {fileID: 11400000, guid: d36fdad741328514ba863a228f81c426, type: 2}
+  GridView: {fileID: 268674690}
 --- !u!1 &2095505907
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +736,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1633579763}
-  - {fileID: 884390797}
-  - {fileID: 1767998136}
   - {fileID: 507277990}
