@@ -33,6 +33,8 @@ namespace Installers.Gameplay
             builder.Register<CreateGridUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ChangeSelectedCellUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ChangeSelectedBuildingTypeUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<CheckCanPlaceBuildingUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlaceBuildingUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
            
             builder.Register<GridPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<BuildingGhostPresenter>(Lifetime.Singleton).AsImplementedInterfaces();

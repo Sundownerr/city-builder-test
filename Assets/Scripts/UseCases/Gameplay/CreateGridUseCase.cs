@@ -38,11 +38,14 @@ namespace UseCases.Gameplay
             _gridModel.SizeX = request.SizeX;
             _gridModel.SizeY = request.SizeY;
             _gridModel.DistanceBetweenCells = request.DistanceBetweenCells;
-            _gridModel.CellOnPosition = new Dictionary<GameObject, GridPosition>();
+            _gridModel.CellToGridPosition = new Dictionary<GameObject, GridPosition>();
+            _gridModel.GridToCellPosition = new Dictionary<GridPosition, GameObject>();
             _gridModel.OccupiedCells = new List<GridPosition>();
 
-            foreach (var (gridPosition, gameObject) in cells)
-                _gridModel.CellOnPosition.Add(gameObject, gridPosition);
+            foreach (var (gridPosition, cell) in cells) {
+                _gridModel.CellToGridPosition.Add(cell, gridPosition);
+                _gridModel.GridToCellPosition.Add(gridPosition, cell);
+            }
         }
     }
 }

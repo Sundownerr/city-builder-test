@@ -8,9 +8,11 @@ namespace Domain.Gameplay.Models
         public int SizeX;
         public int SizeY;
         public int DistanceBetweenCells;
-        public Dictionary<GameObject, GridPosition> CellOnPosition;
+        public Dictionary<GameObject, GridPosition> CellToGridPosition;
+        public Dictionary<GridPosition, GameObject> GridToCellPosition;
         public List<GridPosition> OccupiedCells;
         public GameObject LastSelectedCell;
+        public GridPosition LastSelectedCellPosition;
         public bool LastSelectedCellFree;
     }
 }

@@ -33,7 +33,10 @@ namespace UseCases.Gameplay
             }
 
             var cellGameObject = _raycastHits[0].transform.gameObject;
-            var cellPosition = _gridModel.CellOnPosition[cellGameObject];
+            var cellPosition = _gridModel.CellToGridPosition[cellGameObject];
+
+            _gridModel.LastSelectedCell = cellGameObject;
+            _gridModel.LastSelectedCellPosition = cellPosition;
 
             if (_gridModel.OccupiedCells.Contains(cellPosition)) {
                 _gridModel.LastSelectedCellFree = false;
@@ -41,9 +44,8 @@ namespace UseCases.Gameplay
                 return;
             }
 
-            _gridModel.LastSelectedCell = cellGameObject;
             _gridModel.LastSelectedCellFree = true;
-            
+
             _selectedCellChanged.Publish(new SelectedCellChanged {
                 NewSelectedCell = cellGameObject,
             });

@@ -1,8 +1,11 @@
 ﻿using System;
-using Domain.Application.MessagesDTO;
+using Domain.Gameplay.MessagesDTO;
+using Domain.Gameplay.Models;
 using Infrastructure;
 using MessagePipe;
 using R3;
+using Repositories.Gameplay;
+using VContainer;
 using VContainer.Unity;
 
 namespace UseCases.Gameplay
@@ -11,7 +14,11 @@ namespace UseCases.Gameplay
     {
         private readonly CompositeDisposable _disposable = new();
         private BuildingFactory _buildingFactory;
-        private ISubscriber<SelectPressed> _selectPressed;
+        [Inject] private BuildingProcessModel _buildingProcessModel;
+        [Inject] private BuildingsRepository _buildingsRepository;
+        [Inject] private GridModel _gridModel;
+        [Inject] private ISubscriber<PlaceBuildingRequest> _placeBuildingRequest;
+        [Inject] private IPublisher<BuildingPlaced> _buildingPlaced;
 
         public void Dispose() =>
             _disposable.Dispose();
@@ -19,9 +26,23 @@ namespace UseCases.Gameplay
         public void Initialize()
         {
             _buildingFactory = new BuildingFactory();
-            _selectPressed.Subscribe(x => PlaceBuilding()).AddTo(_disposable);
+            _placeBuildingRequest.Subscribe(x => PlaceBuilding()).AddTo(_disposable);
         }
 
-        private void PlaceBuilding() { }
+        private void PlaceBuilding()
+        {
+            if (!_buildingProcessModel.PlacingBuildingAllowed)
+                return;
+
+            _buildingFactory.CreateBuilding(
+                _buildingsRepository.GetBuildingConfigOfType(_buildingProcessModel.SelecteBuildingType),
+                _gridModel.LastSelectedCellPosition,
+                _gridModel.LastSelectedCell.transform.position);
+
+            _gridModel.OccupiedCells.Add(_gridModel.LastSelectedCellPosition);
+            _gridModel.LastSelectedCellFree = false;
+
+            _buildingPlaced.Publish(new BuildingPlaced());
+        }
     }
 }

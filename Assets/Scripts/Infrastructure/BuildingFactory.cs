@@ -1,18 +1,14 @@
 ﻿using Domain.Gameplay.Models;
 using Repositories.Gameplay;
-using VContainer;
+using UnityEngine;
 
 namespace Infrastructure
 {
     public class BuildingFactory
     {
-        [Inject] private BuildingsRepository _buildingsRepository;
-        
-        public void CreateBuilding(BuildingType type, GridPosition gridPosition)
+        public void CreateBuilding(BuildingConfig config, GridPosition gridPosition, Vector3 gridPositionVector3)
         {
-            var buildingConfig = _buildingsRepository.GetBuildingConfigOfType(type);
-            // var buildingPositionVector3 = 
-            // var buildingInstance = UnityEngine.Object.Instantiate(buildingConfig.Prefab);
+            var buildingInstance = Object.Instantiate(config.Prefab, gridPositionVector3, Quaternion.identity);
         }
     }
 }

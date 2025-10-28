@@ -1020,6 +1020,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelParent: {fileID: 310448615884279517}
+  BuildingAllowed: {fileID: 2100000, guid: 772dd3254683ef640aa55d18cb6179b1, type: 2}
+  BuildingNotAllowed: {fileID: 2100000, guid: 9d3b4d65d024a0748ae237a6770fa48a, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
