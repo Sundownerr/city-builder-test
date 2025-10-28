@@ -10,6 +10,7 @@ namespace Repositories.Gameplay
         public string Name;
         public BuildingType Type;
         public int Cost;
+        public int Income;
         
         public GameObject Prefab;
     }

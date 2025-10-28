@@ -17,7 +17,7 @@ namespace UseCases.Gameplay
         [Inject] private ISubscriber<SelectHousePressed> _selectBuilding1Pressed;
         [Inject] private ISubscriber<SelectFarmPressed> _selectBuilding2Pressed;
         [Inject] private ISubscriber<SelectMinePressed> _selectBuilding3Pressed;
-        [Inject] private IPublisher<SelectedBuildingChanged> _selectedBuildingChanged;
+        [Inject] private IPublisher<SelectedBuildingTypeChanged> _selectedBuildingTypeChanged;
 
         public void Dispose() =>
             _disposable.Dispose();
@@ -42,7 +42,7 @@ namespace UseCases.Gameplay
 
             _buildingProcessModel.SelecteBuildingType = type;
             _buildingProcessModel.BuilingSelected = true;
-            _selectedBuildingChanged.Publish(new SelectedBuildingChanged {NewSelectedBuildingType = type,});
+            _selectedBuildingTypeChanged.Publish(new SelectedBuildingTypeChanged {NewSelectedBuildingType = type,});
         }
 
         private void DeselectBuilding()

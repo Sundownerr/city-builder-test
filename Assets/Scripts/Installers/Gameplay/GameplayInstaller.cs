@@ -31,6 +31,7 @@ namespace Installers.Gameplay
             builder.RegisterInstance(Camera);
             
             builder.RegisterEntryPoint<RaycastFromCameraService>();
+            builder.RegisterEntryPoint<ObjectSelectionService>();
           
             builder.Register<CreateGridUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ChangeSelectedCellUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
@@ -43,6 +44,7 @@ namespace Installers.Gameplay
             builder.Register<GameplayUiPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<GridModel>(Lifetime.Singleton);
+            builder.Register<BuildingsModel>(Lifetime.Singleton);
             builder.Register<BuildingProcessModel>(Lifetime.Singleton);
         }
     }

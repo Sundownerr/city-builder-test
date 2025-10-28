@@ -1,53 +1,40 @@
 ﻿using System;
 using Domain.Gameplay.MessagesDTO;
 using Domain.Gameplay.Models;
-using Infrastructure;
 using MessagePipe;
-using UnityEngine;
+using R3;
 using VContainer;
 using VContainer.Unity;
 
 namespace UseCases.Gameplay
 {
-    public class ChangeSelectedCellUseCase : IInitializable, IDisposable, ITickable
+    public class ChangeSelectedCellUseCase : IInitializable, IDisposable
     {
-        private readonly RaycastHit[] _raycastHits = new RaycastHit[1];
-        [Inject] private IPublisher<CellDeselected> _cellDeselected;
+        private readonly CompositeDisposable _disposable = new();
+        [Inject] private ISubscriber<CellDeselected> _cellDeselected;
         [Inject] private GridModel _gridModel;
-        private int _layerMask;
-        [Inject] private IRaycastFromCameraService _raycastFromCameraService;
-        [Inject] private IPublisher<SelectedCellChanged> _selectedCellChanged;
+        [Inject] private ISubscriber<SelectedCellChanged> _selectedCellChanged;
 
-        public void Dispose() { }
+        public void Dispose() =>
+            _disposable.Dispose();
 
-        public void Initialize() =>
-            _layerMask = LayerMask.GetMask("Selectable");
-
-        public void Tick()
+        public void Initialize()
         {
-            var ray = _raycastFromCameraService.Ray;
+            _selectedCellChanged.Subscribe(x => ChangeSelectedCell(x)).AddTo(_disposable);
+            _cellDeselected.Subscribe(x => DeselectCell()).AddTo(_disposable);
+        }
 
-            if (Physics.RaycastNonAlloc(ray.origin, ray.direction, _raycastHits, Mathf.Infinity, _layerMask) <= 0) {
-                DeselectCell();
-                return;
-            }
-
-            var cellGameObject = _raycastHits[0].transform.gameObject;
+        private void ChangeSelectedCell(SelectedCellChanged selectedCellChanged)
+        {
+            var cellGameObject = selectedCellChanged.NewSelectedCell;
             var cellPosition = _gridModel.CellToGridPosition[cellGameObject];
 
             _gridModel.LastSelectedCell = cellGameObject;
             _gridModel.LastSelectedCellPosition = cellPosition;
             _gridModel.LastSelectedCellFree = !_gridModel.OccupiedCells.Contains(cellPosition);
-
-            _selectedCellChanged.Publish(new SelectedCellChanged {
-                NewSelectedCell = cellGameObject,
-            });
         }
 
-        private void DeselectCell()
-        {
-            _cellDeselected.Publish(new CellDeselected());
+        private void DeselectCell() =>
             _gridModel.LastSelectedCell = null;
-        }
     }
 }

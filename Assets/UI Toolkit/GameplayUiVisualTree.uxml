@@ -1,11 +1,16 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/GameplayUiStyle.uss?fileID=7433441132597879392&amp;guid=c685afbf69e58fb4bbcb274c6e35c960&amp;type=3#GameplayUiStyle" />
-    <ui:VisualElement name="BuildingButtons" style="flex-grow: 1; align-items: flex-end; flex-direction: row; align-self: center; justify-content: center; width: 1049px; align-content: flex-start; margin-bottom: 1%; flex-wrap: nowrap;">
+    <ui:VisualElement name="BuildingButtons" style="flex-grow: 1; align-items: flex-end; flex-direction: row; align-self: center; justify-content: center; width: 895px; align-content: flex-start; flex-wrap: nowrap; position: absolute; bottom: 10px;">
         <ui:Button text="House" name="HouseButton" class="buildingButton" style="height: 103px; width: 107px;" />
         <ui:Button text="Farm" name="FarmButton" class="buildingButton" style="height: 103px; width: 107px;" />
         <ui:Button text="Mine" name="MineButton" class="buildingButton" style="height: 103px; width: 107px;" />
     </ui:VisualElement>
     <ui:VisualElement name="GoldBG" style="flex-grow: 1; background-color: rgb(226, 226, 226); width: 122px; height: 31px; align-self: center; align-items: auto; flex-direction: column-reverse; align-content: flex-start; justify-content: flex-start; position: absolute; top: 19px; left: auto; right: 22px; bottom: auto; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
         <ui:Label text="99999" name="GoldValue" style="font-size: 18px; -unity-text-align: middle-center; -unity-font-style: bold;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="BuildingPanel" style="flex-grow: 1; height: auto; width: 961px; align-items: center; justify-content: center; flex-direction: row; bottom: 126px; position: absolute; left: auto; align-self: center;">
+        <ui:Button text="Move" name="MoveButton" class="buildingPanelButton" />
+        <ui:Button text="Upgrade" name="UpgradeButton" class="buildingPanelButton" />
+        <ui:Button text="Remove" name="RemoveButton" class="buildingPanelButton" />
     </ui:VisualElement>
 </ui:UXML>

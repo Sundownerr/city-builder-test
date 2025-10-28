@@ -2,7 +2,7 @@
 
 namespace Domain.Gameplay.MessagesDTO
 {
-    public struct SelectedBuildingChanged
+    public struct SelectedBuildingTypeChanged
     {
         public BuildingType NewSelectedBuildingType;
     }

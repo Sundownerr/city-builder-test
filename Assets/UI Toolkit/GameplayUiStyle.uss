@@ -4,3 +4,8 @@
     font-size: 28px;
     -unity-font-style: bold;
 }
+
+.buildingPanelButton {
+    width: 80px;
+    height: 42px;
+}
