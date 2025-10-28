@@ -1,4 +1,6 @@
-﻿namespace Domain.Gameplay.Models
+﻿using UnityEngine;
+
+namespace Domain.Gameplay.Models
 {
     public class Building
     {

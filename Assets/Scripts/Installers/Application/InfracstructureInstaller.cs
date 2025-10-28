@@ -14,6 +14,8 @@ namespace Installers.Application
             builder.RegisterBuildCallback(c => { GlobalMessagePipe.SetProvider(c.AsServiceProvider()); });
             builder.RegisterMessageBroker<CreateLevelRequest>(options);
             builder.RegisterMessageBroker<CreateGridRequestDTO>(options);
+            builder.RegisterMessageBroker<SelectedCellChanged>(options);
+            builder.RegisterMessageBroker<CellDeselected>(options);
 
             builder.RegisterEntryPoint<InputService>();
         }

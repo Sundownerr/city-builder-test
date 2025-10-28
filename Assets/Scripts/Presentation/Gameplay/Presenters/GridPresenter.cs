@@ -11,17 +11,16 @@ using VContainer.Unity;
 
 namespace Presentation.Gameplay.Presenters
 {
-    public class GridPresenter : IInitializable, IDisposable, ITickable
+    public class GridPresenter : IInitializable, IDisposable
     {
         private readonly CompositeDisposable _disposable = new();
-        private readonly RaycastHit[] _raycastHits = new RaycastHit[1];
-        [Inject] private Camera _camera;
+        [Inject] private ISubscriber<CellDeselected> _cellDeselected;
         [Inject] private IPublisher<CreateGridRequestDTO> _createGridRequestPublisher;
         [Inject] private ISubscriber<CreateLevelRequest> _createLevelRequestSubscriber;
         [Inject] private GridRepository _gridRepository;
         [Inject] private GridView _gridView;
-        private int _layerMask;
         [Inject] private IRaycastFromCameraService _raycastFromCameraService;
+        [Inject] private ISubscriber<SelectedCellChanged> _selectedCellChanged;
 
         public void Dispose() =>
             _disposable.Dispose();
@@ -29,22 +28,19 @@ namespace Presentation.Gameplay.Presenters
         public void Initialize()
         {
             _createLevelRequestSubscriber.Subscribe(x => SendCreateGridRequest(x)).AddTo(_disposable);
-            _layerMask = LayerMask.GetMask("Selectable");
+            _selectedCellChanged.Subscribe(x => HighlightCell(x.NewSelectedCell)).AddTo(_disposable);
+            _cellDeselected.Subscribe(x => HideHighlight()).AddTo(_disposable);
         }
 
-        public void Tick() =>
-            HighlightCell();
-
-        private void HighlightCell()
-        {
+        private void HideHighlight() =>
             _gridView.GridCellHighlight.gameObject.SetActive(false);
 
-            var ray = _raycastFromCameraService.Ray;
+        private void HighlightCell(GameObject cell)
+        {
+            var highlight = _gridView.GridCellHighlight;
 
-            if (Physics.RaycastNonAlloc(ray.origin, ray.direction, _raycastHits, Mathf.Infinity, _layerMask) > 0) {
-                _gridView.GridCellHighlight.gameObject.SetActive(true);
-                _gridView.GridCellHighlight.transform.position = _raycastHits[0].transform.position;
-            }
+            highlight.gameObject.SetActive(true);
+            highlight.transform.position = cell.transform.position;
         }
 
         private void SendCreateGridRequest(CreateLevelRequest message) =>
