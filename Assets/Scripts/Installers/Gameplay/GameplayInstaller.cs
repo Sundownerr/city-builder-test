@@ -31,13 +31,14 @@ namespace Installers.Gameplay
             builder.RegisterInstance(Camera);
             
             builder.RegisterEntryPoint<RaycastFromCameraService>();
-            builder.RegisterEntryPoint<ObjectSelectionService>();
+            builder.Register<ObjectSelectionService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces(); 
           
             builder.Register<CreateGridUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ChangeSelectedCellUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ChangeSelectedBuildingTypeUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<CheckCanPlaceBuildingUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlaceBuildingUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<SelectBuildingUseCase>(Lifetime.Singleton).AsImplementedInterfaces();
            
             builder.Register<GridPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<BuildingGhostPresenter>(Lifetime.Singleton).AsImplementedInterfaces();

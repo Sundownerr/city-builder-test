@@ -9,12 +9,14 @@ namespace Infrastructure
     public class ObjectSelectionService : IInitializable, ITickable
     {
         private readonly RaycastHit[] _raycastHits = new RaycastHit[10];
+        private TagHandle _buildingTag;
         [Inject] private IPublisher<CellDeselected> _cellDeselected;
-
         private TagHandle _cellTag;
+        private GameObject _lastSelectedBuilding;
         private GameObject _lastSelectedCell;
         private int _layerMask;
         [Inject] private IRaycastFromCameraService _raycastFromCameraService;
+       
         [Inject] private IPublisher<SelectedCellChanged> _selectedCellChanged;
 
         public bool CellSelected { get; private set; }
@@ -26,6 +28,7 @@ namespace Infrastructure
         {
             _layerMask = LayerMask.GetMask("Selectable");
             _cellTag = TagHandle.GetExistingTag("Cell");
+            _buildingTag = TagHandle.GetExistingTag("Building");
         }
 
         public void Tick()
@@ -35,12 +38,14 @@ namespace Infrastructure
 
             if (hits <= 0) {
                 DeselectCell();
+                DeselectBuilding();
                 return;
             }
 
             var newCellSelected = false;
-            var buildingSelected = false;
+            var newBuildingSelected = false;
             var sameCellSelected = false;
+            var sameBuildingSelected = false;
 
             for(var i = 0; i < hits; i++) {
                 var hit = _raycastHits[i];
@@ -60,10 +65,26 @@ namespace Infrastructure
                         });
                     }
                 }
+
+                if (!newBuildingSelected && hitGameObject.CompareTag(_buildingTag)) {
+                    if (_lastSelectedBuilding == hitGameObject) {
+                        sameBuildingSelected = true;
+                    }
+                    else {
+                        LastSelectedBuilding = hitGameObject;
+                        _lastSelectedBuilding = hitGameObject;
+
+                        newBuildingSelected = true;
+                      
+                    }
+                }
             }
 
             if (!sameCellSelected)
                 CellSelected = newCellSelected;
+
+            if (!sameBuildingSelected)
+                BuildingSelected = newBuildingSelected;
         }
 
         private void DeselectCell()
@@ -72,6 +93,13 @@ namespace Infrastructure
             CellSelected = false;
             _lastSelectedCell = null;
             LastSelectedCell = null;
+        }
+
+        private void DeselectBuilding()
+        {
+            BuildingSelected = false;
+            _lastSelectedBuilding = null;
+            LastSelectedBuilding = null;
         }
     }
 }
