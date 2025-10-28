@@ -27,9 +27,14 @@ namespace Presentation.Gameplay.Presenters
         {
             _selectedCellChanged.Subscribe(x => UpdateGhostPosition(x)).AddTo(_disposable);
             _selectedBuildingChanged.Subscribe(x => UpdateGhostModel(x)).AddTo(_disposable);
-            _cellDeselected.Subscribe(x => { }).AddTo(_disposable);
+            _cellDeselected.Subscribe(x => { SetGhostActive(false); }).AddTo(_disposable);
             _placeBuildingAllowed.Subscribe(x => SetGhostBuildingAllowed(true)).AddTo(_disposable);
             _placeBuildingNotAllowed.Subscribe(x => SetGhostBuildingAllowed(false)).AddTo(_disposable);
+        }
+
+        private void SetGhostActive(bool active)
+        {
+            _view.SetActive(active);
         }
 
         private void UpdateGhostModel(SelectedBuildingChanged selectedBuildingChanged)
@@ -45,7 +50,10 @@ namespace Presentation.Gameplay.Presenters
         private void SetGhostBuildingAllowed(bool buildingAllowed) =>
             _view.SetBuildingAllowed(buildingAllowed);
 
-        private void UpdateGhostPosition(SelectedCellChanged selectedCellChanged) =>
+        private void UpdateGhostPosition(SelectedCellChanged selectedCellChanged)
+        {
+            SetGhostActive(true);
             _view.UpdatePosition(selectedCellChanged.NewSelectedCell.transform.position);
+        }
     }
 }

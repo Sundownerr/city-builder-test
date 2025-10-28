@@ -37,14 +37,7 @@ namespace UseCases.Gameplay
 
             _gridModel.LastSelectedCell = cellGameObject;
             _gridModel.LastSelectedCellPosition = cellPosition;
-
-            if (_gridModel.OccupiedCells.Contains(cellPosition)) {
-                _gridModel.LastSelectedCellFree = false;
-                DeselectCell();
-                return;
-            }
-
-            _gridModel.LastSelectedCellFree = true;
+            _gridModel.LastSelectedCellFree = !_gridModel.OccupiedCells.Contains(cellPosition);
 
             _selectedCellChanged.Publish(new SelectedCellChanged {
                 NewSelectedCell = cellGameObject,

@@ -34,5 +34,10 @@ namespace Presentation.Gameplay.Views
             foreach (var meshRenderer in _modelMeshes)
                 meshRenderer.sharedMaterial = material;
         }
+
+        public void SetActive(bool active)
+        {
+            ModelParent.gameObject.SetActive(active);
+        }
     }
 }
