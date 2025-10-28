@@ -4,5 +4,6 @@
     {
         public BuildingType SelecteBuildingType;
         public bool PlacingBuildingAllowed;
+        public bool BuilingSelected;
     }
 }

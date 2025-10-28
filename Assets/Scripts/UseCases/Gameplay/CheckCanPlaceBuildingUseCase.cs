@@ -34,7 +34,8 @@ namespace UseCases.Gameplay
         private bool UpdatePlacingBuildingAllowed()
         {
             var allowed = _gridModel.LastSelectedCell != null &&
-                          _gridModel.LastSelectedCellFree;
+                          _gridModel.LastSelectedCellFree &&
+                          _buildingProcessModel.BuilingSelected;
 
             _buildingProcessModel.PlacingBuildingAllowed = allowed;
 
