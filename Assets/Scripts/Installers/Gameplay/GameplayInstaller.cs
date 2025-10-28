@@ -16,7 +16,7 @@ namespace Installers.Gameplay
         public BuildingsRepository BuildingsRepository;
         public GridView GridView;
         public BuildingGhostView BuildingGhostView;
-        public BuildingButtonsUiView BuildingButtonsUiView;
+        public GameplayUiView GameplayUiView;
         public Camera Camera;
 
         protected override void Configure(IContainerBuilder builder)
@@ -26,7 +26,7 @@ namespace Installers.Gameplay
             
             builder.RegisterInstance(GridView);
             builder.RegisterInstance(BuildingGhostView);
-            builder.RegisterInstance(BuildingButtonsUiView);
+            builder.RegisterInstance(GameplayUiView);
             
             builder.RegisterInstance(Camera);
             
@@ -40,7 +40,7 @@ namespace Installers.Gameplay
            
             builder.Register<GridPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<BuildingGhostPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<BuildingButtonsUiPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<GameplayUiPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<GridModel>(Lifetime.Singleton);
             builder.Register<BuildingProcessModel>(Lifetime.Singleton);

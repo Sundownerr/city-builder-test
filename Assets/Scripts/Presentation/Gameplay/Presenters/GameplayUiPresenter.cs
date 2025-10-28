@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace Presentation.Gameplay.Presenters
 {
-    public class BuildingButtonsUiPresenter : IStartable, IDisposable
+    public class GameplayUiPresenter : IStartable, IDisposable
     {
         private Button _farmButton;
         private Button _houseButton;
@@ -16,7 +16,7 @@ namespace Presentation.Gameplay.Presenters
         [Inject] private IPublisher<SelectFarmPressed> _selectFarmPressed;
         [Inject] private IPublisher<SelectHousePressed> _selectHousePressed;
         [Inject] private IPublisher<SelectMinePressed> _selectMinePressed;
-        [Inject] private BuildingButtonsUiView _view;
+        [Inject] private GameplayUiView _view;
 
         public void Dispose()
         {
