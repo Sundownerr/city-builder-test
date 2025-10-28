@@ -1,4 +1,4 @@
-﻿namespace Domain.Application.MessagesDTO
+﻿namespace Domain.Gameplay.MessagesDTO
 {
     public struct SelectPressed
     {

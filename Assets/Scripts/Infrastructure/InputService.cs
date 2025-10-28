@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Application.MessagesDTO;
+using Domain.Gameplay.MessagesDTO;
 using MessagePipe;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,9 +11,9 @@ namespace Infrastructure
     public class InputService : IInitializable, IDisposable, IInputService, ITickable
     {
         private InputSystem_Actions _inputSystemActions;
-        [Inject] private IPublisher<SelectBuilding1Pressed> _selectBuilding1PressedPublisher;
-        [Inject] private IPublisher<SelectBuilding2Pressed> _selectBuilding2PressedPublisher;
-        [Inject] private IPublisher<SelectBuilding3Pressed> _selectBuilding3PressedPublisher;
+        [Inject] private IPublisher<SelectHousePressed> _selectBuilding1PressedPublisher;
+        [Inject] private IPublisher<SelectFarmPressed> _selectBuilding2PressedPublisher;
+        [Inject] private IPublisher<SelectMinePressed> _selectBuilding3PressedPublisher;
         [Inject] private IPublisher<SelectPressed> _selectPressedPublisher;
         public Vector2 MousePosition { get; private set; }
 
@@ -46,13 +46,13 @@ namespace Infrastructure
             MousePosition = _inputSystemActions.Player.Mouse.ReadValue<Vector2>();
 
         private void SendSelectBuilding1(InputAction.CallbackContext obj) =>
-            _selectBuilding1PressedPublisher.Publish(new SelectBuilding1Pressed());
+            _selectBuilding1PressedPublisher.Publish(new SelectHousePressed());
 
         private void SendSelectBuilding2(InputAction.CallbackContext obj) =>
-            _selectBuilding2PressedPublisher.Publish(new SelectBuilding2Pressed());
+            _selectBuilding2PressedPublisher.Publish(new SelectFarmPressed());
 
         private void SendSelectBuilding3(InputAction.CallbackContext obj) =>
-            _selectBuilding3PressedPublisher.Publish(new SelectBuilding3Pressed());
+            _selectBuilding3PressedPublisher.Publish(new SelectMinePressed());
 
         private void SendSelect(InputAction.CallbackContext obj) =>
             _selectPressedPublisher.Publish(new SelectPressed());

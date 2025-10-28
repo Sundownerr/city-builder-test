@@ -1,5 +1,4 @@
 ﻿using System;
-using Domain.Application.MessagesDTO;
 using Domain.Gameplay.MessagesDTO;
 using Domain.Gameplay.Models;
 using MessagePipe;
@@ -15,9 +14,9 @@ namespace UseCases.Gameplay
         [Inject] private IPublisher<BuildingDeselected> _buildingDeselected;
         [Inject] private ISubscriber<BuildingPlaced> _buildingPlaced;
         [Inject] private BuildingProcessModel _buildingProcessModel;
-        [Inject] private ISubscriber<SelectBuilding1Pressed> _selectBuilding1Pressed;
-        [Inject] private ISubscriber<SelectBuilding2Pressed> _selectBuilding2Pressed;
-        [Inject] private ISubscriber<SelectBuilding3Pressed> _selectBuilding3Pressed;
+        [Inject] private ISubscriber<SelectHousePressed> _selectBuilding1Pressed;
+        [Inject] private ISubscriber<SelectFarmPressed> _selectBuilding2Pressed;
+        [Inject] private ISubscriber<SelectMinePressed> _selectBuilding3Pressed;
         [Inject] private IPublisher<SelectedBuildingChanged> _selectedBuildingChanged;
 
         public void Dispose() =>
